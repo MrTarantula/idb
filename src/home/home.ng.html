@@ -1,0 +1,50 @@
+<div class="wrapper" layout="row">
+    <div class="main" flex="100" flex-gt-md="70">
+        <div ng-repeat="idea in ideas | orderBy:sort" class="md-whiteframe-z2" layout-margin>
+            <div class="idea" layout-padding layout-wrap layout-gt-md="row" layout="column" layout-align="center center">
+                <div class="likes" flex="15" layout="column" layout-align="center center">
+                    <div class="total md-display-3">{{idea.likes}}</div>
+                    <div class="phrase md-subhead">{{idea.likes == 1? " LIKE " : " LIKES "}}</div>
+                    <div>
+                        <md-button ng-click="like(idea._id)" class="md-raised md-primary" ng-hide="$root.currentUser._id == idea.userId">
+                            LIKE
+                        </md-button>
+                        <md-button class="md-raised md-warn" ng-click="deleteIdeaDialog(idea._id)" ng-show="$root.currentUser._id == idea.userId">Delete</md-button>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+                <div class="ideaBody" flex>
+                    <div class="title" layout-padding>
+                        <div class="md-display-2">{{idea.title}}</div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div class="desc md-subhead layout-padding">
+                        {{idea.desc | limitTo: 100}}{{idea.desc.length > 100 ? '...' : ''}}
+                    </div>
+                    <div class="comments">
+                        <md-button ng-href="/view/{{idea._id}}">{{idea.comments.length + (idea.comments.length == 1? " Comment " : " Comments ")}}</md-button>
+                        Submitted {{idea.timestamp}} ago by {{$meteor.users.find(idea.userId)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="side" flex="30" hide show-gt-md>
+        <div layout-padding layout-margin layout="column" flex layout-align="start center" class="md-whiteframe-z2 sideItem">
+            <div class="md-title">
+                <p>Have an idea to improve the AOC?</p>
+                <p>Click the "Submit New Idea" button above.</p>
+                <p>You really should. We need new ideas.</p>
+            </div>
+        </div>
+        <div layout-padding layout-margin layout="column" flex layout-align="start center" class="md-whiteframe-z2 sideItem">
+            <div class="md-title">
+                <p>Have an idea to improve the AOC?</p>
+                <p>Click the "Submit New Idea" button above.</p>
+                <p>You really should. We need new ideas.</p>
+            </div>
+        </div>
+    </div>
+</div>

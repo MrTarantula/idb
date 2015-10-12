@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <div class="main" flex="100">
+        <div class="md-whiteframe-z2" layout-margin>
+            <div class="idea" layout-padding layout-wrap layout-gt-md="row" layout="column" layout-align="center center">
+                <div class="likes" flex="15" layout="column" layout-align="center center">
+                    <div class="total md-display-3">{{idea.likes}}</div>
+                    <div class="phrase md-subhead">{{idea.likes == 1? " LIKE " : " LIKES "}}</div>
+                    <div>
+                        <md-button ng-click="like(idea.id)" class="md-raised md-primary">
+                            LIKE
+                        </md-button>
+                    </div>
+                    <div>
+                        <md-button class="md-raised md-warn" ng-click="deleteIdeaDialog(idea.id)" ng-show="$root.currentUser.username == 'idea.user'">Delete</md-button>
+                    </div>
+                </div>
+                <div class="ideaBody" flex>
+                    <div class="title" layout-padding>
+                        <div class="md-display-2">{{idea.title}}</div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div class="desc md-subhead layout-padding">
+                        {{idea.desc}}
+                    </div>
+                    <div class="submitted">
+                        Submitted {{idea.age + (idea.age == 1 ? " day" : " days")}} ago
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-whiteframe-z2 comments" layout-margin layout-padding layout-gt-md="row" layout="column" ng-repeat="i in getNumber(number) track by $index">
+            <div class="commentUser" flex="15" layout="column">
+                <div class="md-headline">UserName</div>
+                <div class="md-subhead">2015-12-12</div>
+            </div>
+            <div class="commentContent" flex layout="column" layout-padding>
+                <div class="commentTitle md-display-3">
+                    This is the title of the comment.
+                </div>
+                <md-divider layout-padding></md-divider>
+                <div class="commentDesc md-subhead">This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.This is some content.</div>
+            </div>
+        </div>
+    </div>
+</div>

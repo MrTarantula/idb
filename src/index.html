@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>Supreme Court Ideabox</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <base href="/">
+    <link href="lib/angular-material.min.css" rel="stylesheet" type="text/css">
+    <link href="all.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body ng-app="ideabox" ng-controller="IndexController">
+    <header layout="row" layout-align="center center">
+        <div class="md-display-2">This be a box for ideas!</div>
+        <div flex></div>
+        <div class="navbar-right navbar-text">
+            <md-button ng-click="loginDialog()" ng-hide="$root.currentUser">Login</md-button>
+            <md-button ng-click="signupDialog()" ng-hide="$root.currentUser">Sign up</md-button>
+            <div ng-show="$root.currentUser" ng-bind="$root.currentUser.username"></div>
+            <md-button ng-click="logoutDialog()" ng-show="$root.currentUser">Logout</md-button>
+        </div>
+    </header>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button ng-click="sort = 'likes'" ng-class="{'md-hue-1' : sort == 'likes'}" class="md-accent">
+                Highest Voted
+            </md-button>
+            <md-button ng-click="sort = 'comments.length'" ng-class="{'md-hue-1' : sort == 'comments.length'}" class="md-accent">
+                Most Popular
+            </md-button>
+            <md-button ng-click="sort = 'timestamp'" ng-class="{'md-hue-1' : sort == 'timestamp'}" class=" md-accent">
+                Newest Ideas
+            </md-button>
+            <!-- fill up the space between left and right area -->
+            <span flex></span>
+            <md-button ng-click="addNewIdeaDialog() ">
+                Submit New Idea
+            </md-button>
+        </div>
+    </md-toolbar>
+    <ui-view></ui-view>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+    <script src="lib/angular-aria.min.js"></script>
+    <script src="lib/angular-animate.min.js"></script>
+    <script src="lib/angular-material.min.js"></script>
+    <script src="all.min.js"></script>
+    <script src="templates.js"></script>
+
+</body>
+
+</html>

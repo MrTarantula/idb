@@ -1,0 +1,18 @@
+<md-dialog>
+    <md-dialog-content>
+        <div class="md-title">Add New Idea</div>
+        <form name="addForm" ng-submit="addCtrl.addIdea(newIdea)">
+            <md-input-container>
+                <label>Title</label>
+                <input ng-model="newIdea.title">
+            </md-input-container>
+            <md-input-container>
+                <label>Description</label>
+                <textArea rows="4" ng-model="newIdea.desc"></textArea>
+            </md-input-container>
+            <md-button type="submit" class="md-raised md-primary">Submit New Idea</md-button>
+            <md-button type="button" class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>
+        </form>
+        <div class="error">{{addError}}</div>
+    </md-dialog-content>
+</md-dialog>
