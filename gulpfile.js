@@ -6,7 +6,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifyCSS = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
-var server = require('gulp-express');
+var gls = require('gulp-live-server');
 var flatten = require('gulp-flatten');
 
 
@@ -75,5 +75,17 @@ gulp.task('index', function () {
 });
 
 gulp.task('serve', function () {
-    server.run(['app.js']);
+    //1. run your script as a server
+    var server = gls.new('app.js');
+    server.start();
+
+    gulp.watch(['build/**/*.css', 'build/**/*.html'], function (file) {
+        server.notify.apply(server, [file]);
+    });
+    gulp.watch('app.js', server.start.bind(server)); //restart my server
+
+    // Note: try wrapping in a function if getting an error like `TypeError: Bad argument at TypeError (native) at ChildProcess.spawn`
+    gulp.watch('app.js', function () {
+        server.start.bind(server)();
+    });
 });
