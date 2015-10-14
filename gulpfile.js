@@ -11,9 +11,10 @@ var flatten = require('gulp-flatten');
 
 
 var path = {
-    src: 'src/**/*',
-    build: 'build/',
-    lib: 'bower_components/**/*'
+    src: 'client/src/**/*',
+    build: 'client/build/',
+    lib: 'bower_components/**/*',
+    server: 'server/'
 };
 
 gulp.task('default', ['build']);
@@ -76,16 +77,16 @@ gulp.task('index', function () {
 
 gulp.task('serve', function () {
     //1. run your script as a server
-    var server = gls.new('app.js');
+    var server = gls.new(path.server + 'app.js');
     server.start();
 
-    gulp.watch(['build/**/*.css', 'build/**/*.html'], function (file) {
+    gulp.watch([path.build + '**/*.css', path.build + '/**/*.html'], function (file) {
         server.notify.apply(server, [file]);
     });
-    gulp.watch('app.js', server.start.bind(server)); //restart my server
+    gulp.watch(path.server + 'app.js', server.start.bind(server)); //restart my server
 
     // Note: try wrapping in a function if getting an error like `TypeError: Bad argument at TypeError (native) at ChildProcess.spawn`
-    gulp.watch('app.js', function () {
+    gulp.watch(path.server + 'app.js', function () {
         server.start.bind(server)();
     });
 });
