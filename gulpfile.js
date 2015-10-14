@@ -17,7 +17,7 @@ var path = {
     server: 'server/'
 };
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build', 'serve']);
 
 gulp.task('clean', function (cb) {
     del(path.build, cb);

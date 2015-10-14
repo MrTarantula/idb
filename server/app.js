@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var app = module.exports.app = exports.app = express();
 
-app.use(express.static(__dirname + '/build'));
+app.use(express.static(__dirname + '/../client/build'));
 
 require('./routes/routes')(app);
 

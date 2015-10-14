@@ -4,14 +4,14 @@
     angular.module('ideabox')
         .controller('AddIdeaController', AddIdeaController);
 
-    AddIdeaController.$inject = ['$scope', '$rootScope'];
+    AddIdeaController.$inject = ['$scope', '$rootScope', 'api'];
 
-    function AddIdeaController($scope, $rootScope) {
+    function AddIdeaController($scope, $rootScope, api) {
         var vm = this;
 
         vm.addIdea = function (idea) {
             var newIdea = {
-                userId: $rootScope.currentUser._id,
+                userId: 'test',
                 title: idea.title,
                 desc: idea.desc,
                 likes: 0,

@@ -5,16 +5,12 @@
         .module('ideabox')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$scope', '$rootScope', '$mdDialog'];
+    IndexController.$inject = ['$scope', '$rootScope', '$mdDialog', 'api'];
 
-    function IndexController($scope, $rootScope, $mdDialog) {
+    function IndexController($scope, $rootScope, $mdDialog, api) {
         var vm = this;
 
-        $scope.ideas = [{
-            _id: 1,
-            title: "Test",
-            desc: "testing"
-        }];
+        $scope.ideas = api.getIdeas.query();
 
         $scope.close = function () {
             $mdDialog.hide();

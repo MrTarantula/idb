@@ -3,6 +3,7 @@
 
     angular
         .module('ideabox', [
+        'ngResource',
         'ngMaterial',
         'ngAria',
         'ngAnimate',

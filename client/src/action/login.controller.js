@@ -4,9 +4,9 @@
     angular.module('ideabox')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$mdDialog'];
+    LoginController.$inject = ['$scope', 'api'];
 
-    function LoginController($scope) {
+    function LoginController($scope, api) {
         var vm = this;
 
         vm.login = function () {
@@ -17,7 +17,16 @@
             } else if (!$scope.user.password) {
                 $scope.loginError = "Password required";
             } else {
-                /************************LOGIN*****************************/
+                api.login.post({
+                        username: $scope.user.name,
+                        pasword: $scope.user.password
+                    }, function (successData) {
+                        $rootScope.currentUser = successData;
+                    },
+                    function (errorData) {
+                        $scope.loginError = errorData.message;
+                    }
+                );
             }
         };
     }
