@@ -5,7 +5,7 @@
         .module('ideabox')
         .factory('api', ['$resource', function ($resource) {
                 return $resource(
-                    '/api/ideas/:id', {
+                    '/api/ideas/:id', {}, {
                         'getIdeas': {
                             method: 'GET',
                             isArray: true

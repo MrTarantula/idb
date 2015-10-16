@@ -10,7 +10,7 @@
     function IndexController($scope, $rootScope, $mdDialog, api) {
         var vm = this;
 
-        $scope.ideas = api.getIdeas.query();
+        $scope.ideas = api.getIdeas();
 
         $scope.close = function () {
             $mdDialog.hide();
@@ -63,25 +63,24 @@
         };
 
         $scope.addNewIdeaDialog = function () {
-            if (!$rootScope.currentUser) {
-                $mdDialog.show({
-                    scope: $scope,
-                    preserveScope: true,
-                    hasBackdrop: false,
-                    templateUrl: 'action/error.ng.html',
-                    controller: 'ErrorController'
-                });
-            } else {
+            /* if (!$rootScope.currentUser) {
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                hasBackdrop: false,
+                templateUrl: 'action/error.ng.html',
+                controller: 'ErrorController'
+            });
+             } else {*/
 
-                $mdDialog.show({
-                    scope: $scope,
-                    preserveScope: true,
-                    hasBackdrop: false,
-                    templateUrl: 'action/add.ng.html',
-                    controller: 'AddIdeaController',
-                    controllerAs: 'addCtrl'
-                });
-            }
+            $mdDialog.show({
+                scope: $scope,
+                preserveScope: true,
+                hasBackdrop: false,
+                templateUrl: 'action/add.ng.html',
+                controller: 'AddIdeaController',
+                controllerAs: 'addCtrl'
+            });
         };
     }
 })();

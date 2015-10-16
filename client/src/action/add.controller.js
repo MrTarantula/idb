@@ -18,7 +18,9 @@
                 timestamp: (new Date()).getTime(),
                 comments: {}
             };
-            $scope.ideas.push(newIdea);
+            api.saveIdea({
+                idea: newIdea
+            });
 
             console.log('Added idea');
             $scope.newIdea = null;

@@ -17,9 +17,9 @@
             } else if (!$scope.user.password) {
                 $scope.loginError = "Password required";
             } else {
-                api.login.post({
+                api.login({
                         username: $scope.user.name,
-                        pasword: $scope.user.password
+                        password: $scope.user.password
                     }, function (successData) {
                         $rootScope.currentUser = successData;
                     },
