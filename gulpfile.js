@@ -13,7 +13,7 @@ var flatten = require('gulp-flatten');
 var path = {
     src: 'client/src/**/*',
     build: 'client/build/',
-    lib: 'bower_components/**/*',
+    lib: 'node_modules/**/*',
     server: 'server/'
 };
 
@@ -40,7 +40,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('lib', function () {
-    return gulp.src(path.lib + '.min.js')
+    return gulp.src([path.lib + '.min.js', '!node_modules/angular-ui-router/**/angular.min.js'])
         .pipe(flatten())
         .pipe(gulp.dest(path.build + '/lib'));
 });
@@ -65,8 +65,8 @@ gulp.task('css', function () {
 gulp.task('cache', function () {
     return gulp.src([path.src + '.html', '!' + path.src + 'index.html'])
         .pipe(templateCache({
-            module: 'ideabox'
-        }))
+        module: 'ideabox'
+    }))
         .pipe(gulp.dest(path.build));
 });
 
