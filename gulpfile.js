@@ -14,7 +14,8 @@ var path = {
     src: 'client/src/**/*',
     build: 'client/build/',
     lib: 'node_modules/**/*',
-    server: 'server/'
+    server: 'server/',
+    module: 'client/src/app.module.js'
 };
 
 gulp.task('default', ['serve']);
@@ -30,7 +31,7 @@ gulp.task('build', function (cb) {
 
 
 gulp.task('js', function () {
-    return gulp.src(path.src + '.js')
+    return gulp.src([path.module, path.src + '.js'])
         .pipe(concat('all.js'))
         .pipe(gulp.dest(path.build))
         .pipe(uglify())
@@ -65,8 +66,8 @@ gulp.task('css', function () {
 gulp.task('cache', function () {
     return gulp.src([path.src + '.html', '!' + path.src + 'index.html'])
         .pipe(templateCache({
-        module: 'ideabox'
-    }))
+            module: 'ideabox'
+        }))
         .pipe(gulp.dest(path.build));
 });
 

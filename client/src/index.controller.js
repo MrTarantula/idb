@@ -5,9 +5,9 @@
         .module('ideabox')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$scope', '$rootScope', '$mdDialog', 'api'];
+    IndexController.$inject = ['$scope', '$mdDialog', 'api', '$auth'];
 
-    function IndexController($scope, $rootScope, $mdDialog, api) {
+    function IndexController($scope, $mdDialog, api, $auth) {
         var vm = this;
 
         $scope.ideas = api.getIdeas();
@@ -18,6 +18,10 @@
 
         $scope.cancel = function () {
             $mdDialog.cancel();
+        };
+
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
         };
 
         $scope.like = function () {
@@ -48,17 +52,6 @@
                 templateUrl: 'action/logout.ng.html',
                 controller: 'LogoutController',
                 controllerAs: 'logoutCtrl'
-            });
-        };
-
-        $scope.signupDialog = function () {
-            $mdDialog.show({
-                scope: $scope,
-                preserveScope: true,
-                hasBackdrop: false,
-                templateUrl: 'action/signup.ng.html',
-                controller: 'SignupController',
-                controllerAs: 'signupCtrl'
             });
         };
 

@@ -4,30 +4,22 @@
     angular.module('ideabox')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', 'api'];
+    LoginController.$inject = ['$scope', '$window', '$location', '$rootScope', '$auth'];
 
-    function LoginController($scope, api) {
+    function LoginController($scope, $window, $location, $rootScope, $auth) {
         var vm = this;
 
         vm.login = function () {
-            if ($scope.user === null) {
-                $scope.loginError = "User Name and Password required";
-            } else if (!$scope.user.name) {
-                $scope.loginError = "User Name required";
-            } else if (!$scope.user.password) {
-                $scope.loginError = "Password required";
-            } else {
-                api.login({
-                        username: $scope.user.name,
-                        password: $scope.user.password
-                    }, function (successData) {
-                        $rootScope.currentUser = successData;
-                    },
-                    function (errorData) {
-                        $scope.loginError = errorData.message;
-                    }
-                );
-            }
+            $auth.authenticate('google')
+                .then(function (response) {
+                    $window.localStorage.currentUser = JSON.stringify(response.data.user);
+                    $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+                    $scope.close();
+                })
+                .catch(function (response) {
+                    console.log(response.data);
+                    $scope.loginError = response.data.message;
+                });
         };
     }
 })();

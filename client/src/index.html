@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
     <base href="/">
     <link href="lib/angular-material.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/toastr.min.css" rel="stylesheet" type="text/css">
     <link href="all.min.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -13,10 +14,9 @@
         <div class="md-display-2">This be a box for ideas!</div>
         <div flex></div>
         <div class="navbar-right navbar-text">
-            <md-button ng-click="loginDialog()" ng-hide="$root.currentUser">Login</md-button>
-            <md-button ng-click="signupDialog()" ng-hide="$root.currentUser">Sign up</md-button>
-            <div ng-show="$root.currentUser" ng-bind="$root.currentUser.username"></div>
-            <md-button ng-click="logoutDialog()" ng-show="$root.currentUser">Logout</md-button>
+            <md-button ng-click="loginDialog()" ng-if="!isAuthenticated()">Login</md-button>
+            <div ng-if="isAuthenticated()" ng-bind="currentUser.username"></div>
+            <md-button ng-click="logoutDialog()" ng-if="isAuthenticated()">Logout</md-button>
         </div>
     </header>
     <md-toolbar>
@@ -44,7 +44,9 @@
     <script src="lib/angular-aria.min.js"></script>
     <script src="lib/angular-animate.min.js"></script>
     <script src="lib/angular-material.min.js"></script>
-    <script src="all.min.js"></script>
+    <script src="lib/satellizer.min.js"></script>
+    <script src="lib/toastr.min.js"></script>
+    <script src="all.js"></script>
     <script src="templates.js"></script>
 
 </body>

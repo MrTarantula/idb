@@ -7,6 +7,7 @@
         'ngMaterial',
         'ngAria',
         'ngAnimate',
-        'ui.router'
+        'ui.router',
+        'satellizer'
     ]);
 })();

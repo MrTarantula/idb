@@ -6,10 +6,10 @@
                     <div class="total md-display-3">{{idea.likes}}</div>
                     <div class="phrase md-subhead">{{idea.likes == 1? " LIKE " : " LIKES "}}</div>
                     <div>
-                        <md-button ng-click="like(idea._id)" class="md-raised md-primary" ng-hide="$root.currentUser._id == idea.userId">
+                        <md-button ng-click="like(idea._id)" class="md-raised md-primary" ng-if="isAuthenticated() && !currentUser.username">
                             LIKE
                         </md-button>
-                        <md-button class="md-raised md-warn" ng-click="deleteIdeaDialog(idea._id)" ng-show="$root.currentUser._id == idea.userId">Delete</md-button>
+                        <md-button class="md-raised md-warn" ng-click="deleteIdeaDialog(idea._id)" ng-if="isAuthenticated() && currentUser.username">Delete</md-button>
                     </div>
                     <div>
 
@@ -25,7 +25,7 @@
                     </div>
                     <div class="comments">
                         <md-button ng-href="/view/{{idea._id}}">{{idea.comments.length + (idea.comments.length == 1? " Comment " : " Comments ")}}</md-button>
-                        Submitted {{idea.timestamp}} ago by {{$meteor.users.find(idea.userId)}}
+                        Submitted {{idea.timestamp}} ago by {{idea.user}}
                     </div>
                 </div>
             </div>
